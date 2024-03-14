@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 from streamlit_option_menu import option_menu
 from st_pages import Page, show_pages, add_page_title
+from sleep_disorder_module import *
+from sleep_disorder_module1 import *
+import matplotlib.pyplot as plt
+from matplotlib import rc
 
 # side bar: pages link
 show_pages(
@@ -29,7 +33,89 @@ st.text("""수면은 우리 건강에 있어서 매우 중요한 역할을 합�
 건강을 위해 매우 중요합니다. 일반적으로 성인은 하루에 7~9시간의 수면을 취하는 것이 권장됩니다.
 """)
 
+
 # main_text1
+st.divider()
+# 모듈에서 데이터프레임 로드
+df = load_sleep_data()
+
+# 데이터프레임 출력
+# print(df)
+
+# 컴퓨터 폰트 확인
+# for font in fm.fontManager.ttflist:
+#     print(font)
+#     if '한글' in font.name or 'Korean' in font.name:
+#         print(font.name)
+
+# 그래프 폰트 설정
+rc('font', family='GyeonggiTitle')
+
+# 막대 그래프 그리기
+fig, ax = plt.subplots()
+ax.bar(df['진료년도'], df['진료인원합계(명)'], edgecolor='black')
+
+# y축 범위 설정
+y_min = 0
+y_max = "800000"
+ax.set_ylim(y_min, y_max)  
+
+# 마커 추가
+ax.plot(df['진료년도'], df['진료인원합계(명)'], marker='o', markersize=5, color='red', linestyle='-', linewidth=1, label='진료인원합계(명)')
+
+# 그래프 제목 및 축 레이블 설정
+ax.set_title('수면장애로 진료받는 인원 수')
+ax.set_xlabel('진료년도')
+ax.set_ylabel('진료인원수(명)')
+# 범례 추가
+ax.legend()
+
+st.title("최근 5년간 수면장애로 진료를 받은 인원")
+st.text("""자료기간:2017년~2022년
+조사연령:20대~80대이상
+조사지역:전국
+        """)
+
+# 그래프를 streamlit에서 표시
+st.pyplot(fig)
+
+st.header("나날이 증가하는 수면장애")
+st.text("""국민건강보험공단에서 조사한 데이터를 확인해보면 최근 5년간 수면장애로 진료를 받은 인원이 증가하고있다.
+해당 자료는 전국을 대상으로 20대부터 80대 이상의 연령을 조사하였다. 연령으로는 확인해보면 50대 이상이
+수면 장애로 인한 진료를 많이 받았다는 수치를 알 수 있다.
+""")
+
+
+# 모듈에서 데이터프레임 로드
+df = load_sleep_data1()
+
+# 그래프 폰트 설정
+rc('font', family='GyeonggiTitle')
+
+# 막대 그래프 그리기
+fig, ax = plt.subplots()
+ax.bar(df['연령'], df['진료인원합계(명)'], edgecolor='black')
+
+# y축 범위 설정
+y_min = 0
+y_max = "900000"
+ax.set_ylim(y_min, y_max)  
+
+# 마커 추가
+ax.plot(df['연령'], df['진료인원합계(명)'], marker='o', markersize=5, color='red', linestyle='-', linewidth=1, label='진료인원합계(명)')
+
+# 그래프 제목 및 축 레이블 설정
+ax.set_title('수면장애로 진료받는 연령별 인원')
+ax.set_xlabel('연령')
+ax.set_ylabel('진료인원수(명)')
+# 범례 추가
+ax.legend()
+
+# 그래프를 streamlit에서 표시
+st.pyplot(fig)
+
+
+# main_text2
 st.divider()
 st.image('intro1.jpg')
 st.header("일상의 파괴자, 수면장애")
@@ -42,7 +128,7 @@ txt = st.text_area(
     "국민건강보험에 따르면 2022년 수면장애 진료 인원은 109만 8천819명으로 110만 명에 육박했다...."
     )
 
-# main_text2
+# main_text3
 st.divider()
 st.image('intro2.jpg')
 st.header("‘잠 못드는 현대인’ 수면장애 116만명 돌파…50대 이상 가장 많아")
