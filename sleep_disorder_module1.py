@@ -38,9 +38,6 @@ def load_sleep_data1():
     # 진료인원합계(명) int로 변환
     df['진료인원합계(명)'] = df['진료인원합계(명)'].astype(int)
 
-    # 진료인원합계(명)열의 값을 문자열로 변환
-    df['진료인원합계(명)'] = df['진료인원합계(명)'].astype(str)
-
     # 중복되는 값 제거
     df.drop_duplicates(inplace=True)
 
