@@ -4,7 +4,7 @@
 import streamlit as st
 
 # page title
-st.title("건강한 수면 위한 라이프스타일 지침서 🛌")
+st.title("건강한 수면을 위한 라이프스타일 지침서 🛌")
 st.caption('URL: https://www.sleepnet.or.kr/sleep/commandment')
 st.image('lifestyle_image.jpg')
 
