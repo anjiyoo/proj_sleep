@@ -1,6 +1,10 @@
+# 1. 수면 장애는 현대인이 앓고 있는 고질병
+# - 세계 수면의 날 
+# - 수면 장애의 위험 고지 (image/news link)
+
 import streamlit as st
 from streamlit_option_menu import option_menu
-from st_pages import Page, show_pages, add_page_title
+from st_pages import Page, show_pages
 
 # side bar: pages link
 show_pages(
@@ -24,10 +28,10 @@ st.text("""세계수면학회(WASM)가 수면에 대한 올바른 이해와 수�
 
 st.divider()  # 구분선
 
-# main
+# page title
 st.header("수면장애는 현대인의 고질병")
 
-# 뉴스 링크 및 프리뷰
+# page main
 st.image('home_image1.jpg')
 st.subheader("‘잠 못드는 현대인’ 수면장애 116만명 돌파…50대 이상 가장 많아")
 st.caption('작성: 2023.10.02 ')
@@ -38,9 +42,6 @@ txt = st.text_area(
     "비기질성 수면장애 진료현황 자료에 따르면 2018년 91만 606명에서 2020년 103만 7279명으로 증가하면서 "
     "처음으로 100만명을 넘어섰다. 특히 이중 50대 이상 중장년층이 전체 인원의 70%에 달해....")
 
-st.text("")
-
-# 뉴스 링크 및 프리뷰
 st.image('home_image2.jpg')
 st.subheader("일상의 파괴자, 수면장애")
 st.caption('작성: 2024.03.09')

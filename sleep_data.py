@@ -1,10 +1,15 @@
+# 2. 수면 장애를 겪는 현대인들
+# - 수면 장애/비기질성수면장애 진료인원 데이터세트 활용
+# - 현대인의 수면 장애 진료인원을 진료년도&연령별로 데이터 시각화
+# - 수면 장애를 일으키는 요인을 보기 쉬운 이미지로 표현
+
 import matplotlib.pyplot as plt
 from matplotlib import rc
 from sleep_disorder_module import *
 from sleep_disorder_module1 import *
 import streamlit as st
 
-# title
+# page title
 st.title("건강하지 못한 수면 🥊 건강한 수면")
 st.caption('I want sleep....💤')
 st.image('data_image.jpg')
@@ -24,7 +29,7 @@ st.text("""수면은 우리 건강에 있어서 매우 중요한 역할을 합�
 st.divider()  # 구분선
 
 
-# main1
+# page main1
 st.header("🗂️ 데이터로 보는 수면 건강")
 # 그래프 폰트 설정
 rc('font', family='GyeonggiTitle')
@@ -34,10 +39,9 @@ rc('font', family='GyeonggiTitle')
 df = load_sleep_data()  # 데이터 불러오기
 
 fig, ax = plt.subplots()
-bars = ax.bar(df['진료년도'], df['진료인원합계(명)'], edgecolor='black', width=0.5)  # 바 두께 0.3
+bars = ax.bar(df['진료년도'], df['진료인원합계(명)'], edgecolor='black', width=0.5) 
 
-# 막대 색상
-colors = ['powderblue', 'deepskyblue', 'steelblue', 'lightslategray']
+colors = ['powderblue', 'deepskyblue', 'steelblue', 'lightslategray']  # 막대 색상
 for i, bar in enumerate(bars):
     bar.set_color(colors[i % len(colors)])
 
@@ -45,7 +49,7 @@ ax.set_title('최근 5년간 수면장애 진료를 받은 인원수')
 ax.set_xlabel('진료년도')
 ax.set_ylabel('진료인원수(명)')
 ax.legend()  # 범례
-# y축 범위를 변경 (min0 max 1.2)
+# y축 범위를 변경 (min0 max 1.3)
 ax.set_ylim(0, df['진료인원합계(명)'].max() * 1.3)
 # y축 레이블을 표시하지 않음
 ax.set_yticklabels([])
@@ -80,15 +84,9 @@ st.divider()  # 구분선
 df = load_sleep_data1()  # 데이터 불러오기
 
 fig, ax = plt.subplots()
-bars = ax.barh(df['연령'], df['진료인원합계(명)'], edgecolor='black', height=0.5)  # 바의 두께를 0.5
+bars = ax.barh(df['연령'], df['진료인원합계(명)'], edgecolor='black', height=0.5) 
 
-# 막대 끝에 진료인원합계(명) 수치
-for bar in bars:
-    width = bar.get_width()
-    ax.text(width, bar.get_y() + bar.get_height() / 2, f'{width}명', ha='left', va='center')
-
-# 막대 색상
-colors = ['palevioletred', 'plum', 'thistle', 'crimson']
+colors = ['palevioletred', 'plum', 'thistle', 'crimson']  # 막대 색상
 for i, bar in enumerate(bars):
     bar.set_color(colors[i % len(colors)])
 
@@ -100,6 +98,10 @@ ax.legend()  # 범례
 ax.set_xlim(0, df['진료인원합계(명)'].max() * 1.2)
 # x축 레이블을 표시하지 않음
 ax.set_xticklabels([])
+# 막대 끝에 진료인원합계(명) 수치
+for bar in bars:
+    width = bar.get_width()
+    ax.text(width, bar.get_y() + bar.get_height() / 2, f'{width}명', ha='left', va='center')
 
 # 데이터 자료 설명
 st.markdown("<h3> 2.수면장애 진료를 받은 연령별 인원수 </h3>", unsafe_allow_html=True)
@@ -121,7 +123,9 @@ st.text("""하지만 모든 노인이 수면장애를 경험하는 것은 아니
 
 st.divider()  # 구분선
 
-# main2
+
+
+# page main2
 st.header("🧘🏻 수면장애 요인이 되는 생활습관  ")
 col1, col2, col3 = st.columns(3)
 
